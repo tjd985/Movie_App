@@ -1,5 +1,6 @@
 import React from "react";
 import Movie from "../components/Movie";
+import styles from "./Home.module.css";
 
 function Home() {
   const [loading, setLoading] = React.useState(true);
@@ -18,25 +19,30 @@ function Home() {
   React.useEffect(() => {
     getMovies();
   }, []);
+  console.log(movie);
 
   return (
     <div>
-      <h1>Moive App</h1>
-      <hr />
+      <h1 className={styles.title}>Moive App</h1>
       {loading ? (
-        <span>loading...</span>
+        <span className={styles.loading}>loading...</span>
       ) : (
         <div>
-          {movie.map((index) => (
-            <Movie
-              key={index.id}
-              id={index.id}
-              poster={index.medium_cover_image}
-              title={index.title_long}
-              genres={index.genres}
-              summary={index.summary}
-            />
-          ))}
+          <p className={styles.explane}>
+            only shows movies with a rating of 9 or higher.
+          </p>
+          <div className={styles.inner}>
+            {movie.map((index) => (
+              <Movie
+                key={index.id}
+                id={index.id}
+                poster={index.medium_cover_image}
+                title={index.title_long}
+                genres={index.genres}
+                summary={index.summary}
+              />
+            ))}
+          </div>
         </div>
       )}
     </div>
